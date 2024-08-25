@@ -1,0 +1,4 @@
+fastapi==0.100.0  # Version as of the cutoff date
+uvicorn==0.23.0  # ASGI server for serving FastAPI applications
+pydantic==1.10.2  # For data validation and serialization
+requests==2.31.0  # For making HTTP requests to external APIs
