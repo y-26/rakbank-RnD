@@ -3,8 +3,8 @@ provider "azurerm" {
 }
 
 resource "azurerm_resource_group" "rg" {
-  name     = "my-resource-group"
-  location = "East US"
+  name     = "RG-Rakbank-proj-RnD"
+  location = "Central India"
 }
 
 # Backend App Service Plan (Windows)
@@ -23,7 +23,7 @@ resource "azurerm_app_service_plan" "backend_plan" {
 
 # Backend App Service
 resource "azurerm_app_service" "backend_app" {
-  name                = "backend-app-service"
+  name                = "backend-api-demo"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
   app_service_plan_id = azurerm_app_service_plan.backend_plan.id
@@ -49,7 +49,7 @@ resource "azurerm_app_service_plan" "frontend_plan" {
 
 # Frontend App Service
 resource "azurerm_app_service" "frontend_app" {
-  name                = "frontend-app-service"
+  name                = "frontend-api-demo"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
   app_service_plan_id = azurerm_app_service_plan.frontend_plan.id
