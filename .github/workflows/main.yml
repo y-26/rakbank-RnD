@@ -13,10 +13,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Install unzip (Linux)
-        run: sudo apt-get install unzip -y
-        if: runner.os == 'Linux'
-
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
@@ -47,10 +43,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Install unzip (Linux)
-        run: sudo apt-get install unzip -y
-        if: runner.os == 'Linux'
-
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
@@ -79,6 +71,14 @@ jobs:
       - name: Install unzip (Linux)
         run: sudo apt-get install unzip -y
         if: runner.os == 'Linux'
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'  # Ensure Node.js is installed
+
+      - name: Check Node.js version
+        run: node --version
 
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v2
