@@ -68,14 +68,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Install unzip (Linux)
-        run: sudo apt-get install unzip -y
-        if: runner.os == 'Linux'
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18.x'  # Ensure Node.js is installed
+      - name: Install Node.js if missing
+        run: |
+          if ! command -v node &> /dev/null; then
+            echo "Node.js not found, installing..."
+            curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+            sudo apt-get install -y nodejs
+          else
+            echo "Node.js found"
+          fi
 
       - name: Check Node.js version
         run: node --version
