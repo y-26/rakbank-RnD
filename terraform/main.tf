@@ -8,7 +8,7 @@ resource "azurerm_resource_group" "rg" {
 }
 
 # Backend App Service Plan (Windows)
-resource "azurerm_app_service_plan" "backend_plan" {
+resource "azurerm_service_plan" "backend_plan" {
   name                = "backend-service-plan"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
@@ -26,15 +26,16 @@ resource "azurerm_app_service" "backend_app" {
   name                = "backend-api-demo"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
-  app_service_plan_id = azurerm_app_service_plan.backend_plan.id
+  app_service_plan_id = azurerm_service_plan.backend_plan.id
 
   site_config {
-    python_version = "3.10"
+    # Adjust this to a supported Python version or use a custom container
+    python_version = "3.4"  # Or use "linux_fx_version" if you need Python 3.10
   }
 }
 
 # Frontend App Service Plan (Linux)
-resource "azurerm_app_service_plan" "frontend_plan" {
+resource "azurerm_service_plan" "frontend_plan" {
   name                = "frontend-service-plan"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
@@ -52,7 +53,7 @@ resource "azurerm_app_service" "frontend_app" {
   name                = "frontend-api-demo"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
-  app_service_plan_id = azurerm_app_service_plan.frontend_plan.id
+  app_service_plan_id = azurerm_service_plan.frontend_plan.id
 
   site_config {
     linux_fx_version = "NODE|18-lts"
