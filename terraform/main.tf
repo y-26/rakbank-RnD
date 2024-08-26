@@ -1,5 +1,5 @@
 provider "azurerm" {
-  features = {}
+  features {}  # This should be a block, not an argument
 }
 
 resource "azurerm_resource_group" "rg" {
